@@ -20,6 +20,16 @@ public class ProfileController : ControllerBase
         _context = context;
     }
 
+    [HttpGet("ProtectedData")]
+    [Authorize]
+    public IActionResult GetProtectedData()
+    {
+        // Retrieve and return protected data
+        // ...
+
+        return Ok(new { data = "This is protected data" });
+    }
+
     [HttpPost("SavePhoneNumber")]
     public IActionResult SavePhoneNumber([FromBody] PhoneNumberRequest request)
     {
@@ -52,8 +62,6 @@ public class ProfileController : ControllerBase
 
     private string GenerateVerificationCode()
     {
-        // Implement your logic to generate a secure verification code
-        // For simplicity, let's use a random 6-digit code in this example
         Random random = new Random();
         return random.Next(100000, 999999).ToString();
     }

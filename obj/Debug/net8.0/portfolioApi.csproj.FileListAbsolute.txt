@@ -125,6 +125,7 @@ C:\Users\LirijeShabani\Documents\portfolioApi\portfolioApi\obj\Debug\net8.0\port
 C:\Users\LirijeShabani\Documents\portfolioApi\portfolioApi\obj\Debug\net8.0\portfolioApi.csproj.CoreCompileInputs.cache
 C:\Users\LirijeShabani\Documents\portfolioApi\portfolioApi\obj\Debug\net8.0\portfolioApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\LirijeShabani\Documents\portfolioApi\portfolioApi\obj\Debug\net8.0\portfolioApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\LirijeShabani\Documents\portfolioApi\portfolioApi\obj\Debug\net8.0\portfolioApi.sourcelink.json
 C:\Users\LirijeShabani\Documents\portfolioApi\portfolioApi\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\LirijeShabani\Documents\portfolioApi\portfolioApi\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\LirijeShabani\Documents\portfolioApi\portfolioApi\obj\Debug\net8.0\staticwebassets\msbuild.portfolioApi.Microsoft.AspNetCore.StaticWebAssets.props
