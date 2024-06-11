@@ -20,51 +20,48 @@ public class ProfileController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("ProtectedData")]
-    [Authorize]
-    public IActionResult GetProtectedData()
-    {
-        // Retrieve and return protected data
-        // ...
+    //[HttpGet("ProtectedData")]
+    //[Authorize]
+    //public IActionResult GetProtectedData()
+    //{
+    //    return Ok(new { data = "This is protected data" });
+    //}
 
-        return Ok(new { data = "This is protected data" });
-    }
+    //[HttpPost("SavePhoneNumber")]
+    //public IActionResult SavePhoneNumber([FromBody] PhoneNumberRequest request)
+    //{
+    //    try
+    //    {
+    //        if (string.IsNullOrWhiteSpace(request.PhoneNumber))
+    //        {
+    //            return BadRequest("Phone number is required.");
+    //        }
 
-    [HttpPost("SavePhoneNumber")]
-    public IActionResult SavePhoneNumber([FromBody] PhoneNumberRequest request)
-    {
-        try
-        {
-            if (string.IsNullOrWhiteSpace(request.PhoneNumber))
-            {
-                return BadRequest("Phone number is required.");
-            }
+    //        var phoneNumberRequest = new PhoneNumberRequest
+    //        {
+    //            PhoneNumber = request.PhoneNumber
+    //        };
 
-            var phoneNumberRequest = new PhoneNumberRequest
-            {
-                PhoneNumber = request.PhoneNumber
-            };
+    //        _context.PhoneNumberRequest.Add(phoneNumberRequest);
+    //        _context.SaveChanges();
 
-            _context.PhoneNumberRequest.Add(phoneNumberRequest);
-            _context.SaveChanges();
+    //        // Generate a verification code
+    //        string verificationCode = GenerateVerificationCode();
 
-            // Generate a verification code
-            string verificationCode = GenerateVerificationCode();
+    //        return Ok(new { success = true, verificationCode });
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Console.Error.WriteLine($"Unexpected error: {ex.Message}");
+    //        return StatusCode(500, "Internal Server Error");
+    //    }
+    //}
 
-            return Ok(new { success = true, verificationCode });
-        }
-        catch (Exception ex)
-        {
-            Console.Error.WriteLine($"Unexpected error: {ex.Message}");
-            return StatusCode(500, "Internal Server Error");
-        }
-    }
-
-    private string GenerateVerificationCode()
-    {
-        Random random = new Random();
-        return random.Next(100000, 999999).ToString();
-    }
+    //private string GenerateVerificationCode()
+    //{
+    //    Random random = new Random();
+    //    return random.Next(100000, 999999).ToString();
+    //}
 
     [HttpGet("ProfileData")]
     public async Task<IActionResult> GetProfileInfo()
@@ -73,7 +70,7 @@ public class ProfileController : ControllerBase
 
         if (profile == null)
         {
-            return NotFound("User not found"); 
+            return NotFound("User not found");
         }
 
         return Ok(profile);
