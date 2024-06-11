@@ -18,6 +18,5 @@ namespace portfolioApi.Context
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Utility> Utilities { get; set; }
-        public DbSet<PhoneNumberRequest> PhoneNumberRequest { get; set; }
     }
 }
