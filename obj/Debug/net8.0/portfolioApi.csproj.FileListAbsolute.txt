@@ -283,3 +283,4 @@ C:\Users\lirij\Desktop\Projects\PortfolioBackend\obj\Debug\net8.0\portfolioApi.p
 C:\Users\lirij\Desktop\Projects\PortfolioBackend\obj\Debug\net8.0\portfolioApi.genruntimeconfig.cache
 C:\Users\lirij\Desktop\Projects\PortfolioBackend\obj\Debug\net8.0\ref\portfolioApi.dll
 C:\Users\lirij\Desktop\Projects\PortfolioBackend\bin\Debug\net8.0\dotenv.net.dll
+C:\Users\lirij\Desktop\Projects\PortfolioBackend\bin\Debug\net8.0\.env

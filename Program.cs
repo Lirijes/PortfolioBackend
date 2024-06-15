@@ -3,15 +3,15 @@ using portfolioApi.Context;
 using Microsoft.EntityFrameworkCore;
 using portfolioApi.Components.Middleware;
 using dotenv.net;
-using dotenv.net.Utilities;
-
-// Load environment variables from .env file
-DotEnv.Load();
+using Microsoft.Extensions.FileProviders;
 
 // Get connection string from environment variables
 var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Load environment variables from .env file
+DotEnv.Load();
 
 // Add services to the container.
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
@@ -21,6 +21,13 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 builder.Services.AddDbContext<ProfileContext>(options =>
     options.UseSqlServer(connectionString));
 
+// Configure logging
+builder.Services.AddLogging(logging =>
+{
+    logging.ClearProviders();
+    logging.AddConsole();
+    logging.SetMinimumLevel(LogLevel.Information);
+});
 
 // Swagger API
 builder.Services.AddSwaggerGen(c =>
@@ -55,6 +62,17 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+// Serve static files from a custom directory
+var staticFileDirectory = @"h:\root\home\lirijes-001\www\portfolio\images";
+var fileProvider = new PhysicalFileProvider(staticFileDirectory);
+var requestPath = "/portfolio/images";
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = fileProvider,
+    RequestPath = requestPath
+});
+
 // Cors
 app.UseCors(b => b.WithOrigins("http://localhost:3000", "http://localhost:3001")
     .AllowAnyMethod()
@@ -65,18 +83,19 @@ app.UseCors(b => b.WithOrigins("http://localhost:3000", "http://localhost:3001")
 app.UseMiddleware<ApiKeyMiddleware>();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-        c.DefaultModelsExpandDepth(-1); // Disable schema models at the bottom of the Swagger UI
-    });
-}
+    app.UseSwaggerUI();
+    // (c =>
+//    {
+//        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+//        c.DefaultModelsExpandDepth(-1); // Disable schema models at the bottom of the Swagger UI
+//    });
+//}
+
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
 app.UseRouting();
 
