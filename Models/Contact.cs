@@ -19,7 +19,7 @@ namespace portfolioApi.Models
 
         [Required]
         [Column(TypeName = "nvarchar(50)")]
-        [RegularExpression(@"^(?:(?:\+46|0)\s*(?:[1-9][0-9]?[0-9]?)\s*-?\s*(?:[0-9]{2,3})\s*-?\s*(?:[0-9]{4,}))$", ErrorMessage = "Invalid Swedish phone number")]
+        [RegularExpression(@"^(?:(?:\+46\s*(?:[1-9][0-9]{1,2})\s*-?\s*(?:[0-9]{2,3})\s*-?\s*(?:[0-9]{2,4})|0\s*(?:[1-9][0-9]?[0-9]?)\s*-?\s*(?:[0-9]{2,3})\s*-?\s*(?:[0-9]{4,}))$)", ErrorMessage = "Invalid Swedish phone number")]
         public string Phone { get; set; }
 
         [Required]

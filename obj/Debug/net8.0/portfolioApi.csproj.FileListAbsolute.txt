@@ -284,3 +284,6 @@ C:\Users\lirij\Desktop\Projects\PortfolioBackend\obj\Debug\net8.0\portfolioApi.g
 C:\Users\lirij\Desktop\Projects\PortfolioBackend\obj\Debug\net8.0\ref\portfolioApi.dll
 C:\Users\lirij\Desktop\Projects\PortfolioBackend\bin\Debug\net8.0\dotenv.net.dll
 C:\Users\lirij\Desktop\Projects\PortfolioBackend\bin\Debug\net8.0\.env
+C:\Users\lirij\Desktop\Projects\PortfolioBackend\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\lirij\Desktop\Projects\PortfolioBackend\bin\Debug\net8.0\MailKit.dll
+C:\Users\lirij\Desktop\Projects\PortfolioBackend\bin\Debug\net8.0\MimeKit.dll

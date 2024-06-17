@@ -1,23 +1,21 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using portfolioApi.Context;
 using portfolioApi.Models;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
+using portfolioApi.Services;
 
 [ApiController]
 [Route("api/[controller]")]
 public class ProfileController : ControllerBase
 {
     private readonly ProfileContext _context;
+    private readonly EmailService _emailService;
 
-    public ProfileController(ProfileContext context)
+    public ProfileController(ProfileContext context, EmailService emailService)
     {
         _context = context;
+        _emailService = emailService;
     }
 
     [HttpGet("ProfileData")]
@@ -121,7 +119,7 @@ public class ProfileController : ControllerBase
         {
             return NotFound("No project found");
         }
-        
+
         return Ok(project);
     }
 
@@ -142,17 +140,21 @@ public class ProfileController : ControllerBase
         {
             // Save the contact data to the database or perform other actions
             _context.Contacts.Add(contact);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
+
+            // Send email notification
+            await _emailService.SendEmailAsync(
+               "lirije11@hotmail.com",
+               "New Contact Form Submission",
+               $"Name: {contact.Name}\nEmail: {contact.Email}\nPhonenumber: {contact.Phone}\nMessage: {contact.Message}");
 
             return Ok("Form submitted successfully");
         }
         catch (Exception ex)
         {
-            // Log the exception or handle it as needed
             return StatusCode(500, "An error occurred while processing the form");
         }
     }
-
 
     [HttpGet("Skills")]
     public async Task<IActionResult> GetSkills()
