@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using portfolioApi.Context;
 
@@ -10,9 +11,11 @@ using portfolioApi.Context;
 namespace portfolioApi.Migrations
 {
     [DbContext(typeof(ProfileContext))]
-    partial class ProfileContextModelSnapshot : ModelSnapshot
+    [Migration("20240617092252_regex changed in contact model")]
+    partial class regexchangedincontactmodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -232,10 +235,6 @@ namespace portfolioApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProjectUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
