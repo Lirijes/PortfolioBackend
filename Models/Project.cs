@@ -6,7 +6,9 @@
         public string ProjectTitle { get; set; }
         public string ProjectUrl { get; set; }
         public string Description { get; set; }
-        public string Todo { get; set; }
+        public string Improvements { get; set; }
+        public string LessonsLearned { get; set; }
+        public string Notes { get; set; }
         public string GithubUrl { get; set; }
         public string Status { get; set; }
         public string Image1 { get; set; }
