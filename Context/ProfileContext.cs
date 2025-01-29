@@ -18,5 +18,22 @@ namespace portfolioApi.Context
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Utility> Utilities { get; set; }
+        public DbSet<ProjectUtility> ProjectUtilities { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProjectUtility>()
+                .HasKey(pu => new { pu.ProjectId, pu.UtilityId }); // define PK
+
+            modelBuilder.Entity<ProjectUtility>()
+                .HasOne(pu => pu.Project)
+                .WithMany(p => p.ProjectUtilities)
+                .HasForeignKey(pu => pu.ProjectId);
+
+            modelBuilder.Entity<ProjectUtility>()
+                .HasOne(pu => pu.Utility)
+                .WithMany(u => u.ProjectUtilities)
+                .HasForeignKey(pu => pu.UtilityId);
+        }
     }
 }

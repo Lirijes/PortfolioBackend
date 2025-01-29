@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "9Sl7r0NUQRYLsK2qkhEqgkdUne7xTlYcYp21bz6llnc=",
+  "Hash": "tVrtIaJR8yj8z/qyh4BcPv9sSIi41x175jRNDaDvMXI=",
   "Source": "portfolioApi",
   "BasePath": "_content/portfolioApi",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

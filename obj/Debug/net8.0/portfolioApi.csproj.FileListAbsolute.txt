@@ -296,3 +296,7 @@ C:\Users\lirij\Desktop\Projects\PortfolioBackend\bin\Debug\net8.0\Serilog.Settin
 C:\Users\lirij\Desktop\Projects\PortfolioBackend\bin\Debug\net8.0\Serilog.Sinks.Console.dll
 C:\Users\lirij\Desktop\Projects\PortfolioBackend\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
 C:\Users\lirij\Desktop\Projects\PortfolioBackend\bin\Debug\net8.0\Serilog.Sinks.File.dll
+C:\Users\lirij\Desktop\Projects\PortfolioBackend\bin\Debug\net8.0\portfolioApi.staticwebassets.endpoints.json
+C:\Users\lirij\Desktop\Projects\PortfolioBackend\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\lirij\Desktop\Projects\PortfolioBackend\obj\Debug\net8.0\staticwebassets\msbuild.portfolioApi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\lirij\Desktop\Projects\PortfolioBackend\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

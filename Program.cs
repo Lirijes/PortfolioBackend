@@ -50,6 +50,7 @@ builder.Services.AddLogging(logging =>
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
 });
 //builder.Services.AddSwaggerGen(c =>
 //{
@@ -85,17 +86,25 @@ var app = builder.Build();
 
 // Serve static files from a custom directory
 var staticFileDirectory = @"h:\root\home\lirijes-001\www\portfolio\images";
+
+if (!Directory.Exists(staticFileDirectory))
+{
+    Console.WriteLine($"Directory does NOT exist: {staticFileDirectory}");
+    staticFileDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+    Console.WriteLine($"Falling back to: {staticFileDirectory}");
+}
+
 var fileProvider = new PhysicalFileProvider(staticFileDirectory);
-var requestPath = "/portfolio/images";
+var requestPath = "/images";
 
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = fileProvider,
+    FileProvider = new PhysicalFileProvider(staticFileDirectory),
     RequestPath = requestPath
 });
 
 // Cors
-app.UseCors(b => b.WithOrigins("http://localhost:3000", "http://localhost:3001", "https://portfolio-9k5o.onrender.com")
+app.UseCors(b => b.AllowAnyOrigin()
     .AllowAnyMethod()
     .AllowAnyHeader());
 
