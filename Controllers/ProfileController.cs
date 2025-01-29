@@ -70,7 +70,6 @@ public class ProfileController : ControllerBase
         return Ok(experiences);
     }
 
-
     [HttpGet("ProfileExperience")]
     public async Task<IActionResult> GetProfileExperience(int id)
     {
@@ -182,6 +181,7 @@ public class ProfileController : ControllerBase
         return Ok(skill);
     }
 
+    #region utilites
 
     [HttpGet("Utilities")]
     public async Task<IActionResult> GetUtilities()
@@ -208,4 +208,69 @@ public class ProfileController : ControllerBase
 
         return Ok(utility);
     }
+
+    [HttpDelete("Projects/{projectId}/Utilities/{utilityId}")]
+    public async Task<IActionResult> RemoveUtilityFromProject(int projectId, int utilityId)
+    {
+        var projectUtility = await _context.ProjectUtilities
+            .FirstOrDefaultAsync(pu => pu.ProjectId == projectId && pu.UtilityId == utilityId);
+
+        if (projectUtility == null)
+        {
+            return NotFound("The association between Project and Utility does not exist.");
+        }
+
+        _context.ProjectUtilities.Remove(projectUtility);
+        await _context.SaveChangesAsync();
+
+        return Ok("Utility removed from Project successfully.");
+    }
+
+    [HttpGet("Projects/{projectId}/Utilities")]
+    public async Task<IActionResult> GetUtilitiesForProject(int projectId)
+    {
+        var project = await _context.Projects
+            .Include(p => p.ProjectUtilities)
+            .ThenInclude(pu => pu.Utility)
+            .FirstOrDefaultAsync(p => p.Id == projectId);
+
+        if (project == null)
+        {
+            return NotFound("Project not found.");
+        }
+
+        var utilities = project.ProjectUtilities.Select(pu => pu.Utility).ToList();
+        return Ok(utilities);
+    }
+
+    [HttpPost("Projects/{projectId}/Utilities/{utilityId}")]
+    public async Task<IActionResult> AddUtilityToProject(int projectId, int utilityId)
+    {
+        var project = await _context.Projects.FindAsync(projectId);
+        var utility = await _context.Utilities.FindAsync(utilityId);
+
+        if (project == null || utility == null)
+        {
+            return NotFound("Project or Utility not found.");
+        }
+
+        // check if relation already exists
+        if (await _context.ProjectUtilities.AnyAsync(pu => pu.ProjectId == projectId && pu.UtilityId == utilityId))
+        {
+            return Conflict("Utility is already associated with this Project.");
+        }
+
+        // create relation
+        var projectUtility = new ProjectUtility
+        {
+            ProjectId = projectId,
+            UtilityId = utilityId
+        };
+
+        _context.ProjectUtilities.Add(projectUtility);
+        await _context.SaveChangesAsync();
+
+        return Ok("Utility added to Project successfully.");
+    }
+    #endregion
 }

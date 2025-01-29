@@ -4,11 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using portfolioApi.Components.Middleware;
 using dotenv.net;
 using Microsoft.Extensions.FileProviders;
-using System.Net.Http.Headers;
 using portfolioApi.Services;
-using Microsoft.Extensions.Logging;
-using Serilog;
-using Serilog.Events;
 
 // Load environment variables from .env file
 DotEnv.Load();
@@ -51,36 +47,34 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 
-});
-//builder.Services.AddSwaggerGen(c =>
-//{
-//    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-//    c.AddSecurityDefinition("API_KEY", new OpenApiSecurityScheme
-//    {
-//        Description = "API Key needed to access the endpoints. ApiKey: Your_API_Key",
-//        In = ParameterLocation.Header,
-//        Name = "API_KEY",
-//        Type = SecuritySchemeType.ApiKey,
-//        Scheme = "ApiKeyScheme"
-//    });
+    // Add API Key security definition
+    c.AddSecurityDefinition("API_KEY", new OpenApiSecurityScheme
+    {
+        Description = "API Key needed to access the endpoints. Add it to the request header.",
+        In = ParameterLocation.Header, // API key is passed in the header
+        Name = "API_KEY",              // Header name
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "ApiKeyScheme"
+    });
 
-//    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-//    {
-//        {
-//            new OpenApiSecurityScheme
-//            {
-//                Reference = new OpenApiReference
-//                {
-//                    Type = ReferenceType.SecurityScheme,
-//                    Id = "API_KEY"
-//                },
-//                Name = "API_KEY",
-//                In = ParameterLocation.Header,
-//            },
-//            new List<string>()
-//        }
-//    });
-//});
+    // Require API Key for all endpoints
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "API_KEY"
+                },
+                In = ParameterLocation.Header,
+                Name = "API_KEY"
+            },
+            new List<string>()
+        }
+    });
+});
 
 var app = builder.Build();
 

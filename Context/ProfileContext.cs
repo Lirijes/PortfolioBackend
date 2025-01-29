@@ -22,6 +22,7 @@ namespace portfolioApi.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // many-to-many-realtionship between project and utilites
             modelBuilder.Entity<ProjectUtility>()
                 .HasKey(pu => new { pu.ProjectId, pu.UtilityId }); // define PK
 
